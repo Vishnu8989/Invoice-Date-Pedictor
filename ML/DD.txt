@@ -1,0 +1,27 @@
+
+cust_number: customer number given to all the customers of the account
+
+clear_date: date on which the customer clears an invoice, or in simple terms, makes the full payment
+
+doc_id: a unique identifier of an invoice
+
+posting_date: the date on which the particular invoice was entered in the ERP database
+
+document_create_date: the date on which the invoice document was created
+
+document_create_date.1: normalized version of document_create_date (we'll use this to split the
+data)
+
+due_in_date: the date on which the customer is expected to clear an invoice
+
+total_open_amount: the amount that is yet to be paid for that invoice
+
+baseline_create_date: the date on which the invoice was created
+
+cust_payment_terms: business terms and agreements between customers and accounts on
+discounts and days of payments
+
+invoice_id: unique number assigned when a seller creates an invoice
+
+isOpen: indicator of whether an invoice is open or closed. isOpen = 1, means that the invoice is still
+open
