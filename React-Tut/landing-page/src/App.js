@@ -1,12 +1,12 @@
-import Navbar from "./Components/TopDisplay";
 import Buttons from "./Components/BottonBar";
+import TopDisplay from "./Components/TopDisplay";
 
 function App() {
   return (
-    <div>
-      <Navbar/>
+    <>
+        <TopDisplay/>
         <Buttons/>
-    </div>
+    </>
   );
 }
 

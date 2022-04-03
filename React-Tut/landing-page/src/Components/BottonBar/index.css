@@ -1,0 +1,20 @@
+.container{
+    padding-top: 4vh;
+    display: grid;
+    grid-template-columns: 7fr 3fr 5fr;
+}
+.grp-1,.grp-2,.grp-3{
+    /*border: white solid .1vw;*/
+}
+.grp-1{
+    padding-left: 2vw;
+    justify-self: flex-start;
+}
+.grp-2{
+}
+.grp-3{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-self: center;
+    justify-items: center;
+}
