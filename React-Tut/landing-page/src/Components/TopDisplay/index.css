@@ -1,4 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 .topBar{
-    padding: 3rem 0;
-    background: aquamarine;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 100vw;
+    height: 10vh;
+    max-height: 10vh;
+    padding: 2.5vw 0;
+    background: #2D4250;
+    /*border: .1vw green solid;*/
+}
+
+.Logo_1{
+    height: 10vh;
+    width: 30vw;
+    max-height: 10vh;
+    max-width: 20vw;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    /*border: .1vw red solid;*/
+}
+.Logo_1>img{
+
+    height: 7vh;
+    width: 5vw;
+    max-height: 7vh;
+    max-width: 5vw;
+    /*border: .1vw red solid;*/
+
+}
+.cont_1{
+    max-height: 7vh;
+    max-width: 5vw;
+    align-self: center;
+    justify-self: center;
+    /*border: .1vw orange solid;*/
+}
+.cont_2{
+    color: white;
+    align-self: center;
+    justify-self: flex-start;
+    font-weight: 1000;
+    font-size: 4vh;
+    /*border: .1vw white solid;*/
+}
+.Logo_2{
+    height: 10vh;
+    width: 30vw;
+    max-height: 10vh;
+    max-width: 20vw;
+    /*border: .1vw white solid;*/
+    justify-self: flex-start;
+    align-self: center;
+}
+.Logo_2>img{
+    height: 10vh;
+    width: 20vw;
+    max-height: 10vh;
+    max-width: 20vw;
+    /*border: .1vw red solid;*/
 }

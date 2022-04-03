@@ -1,9 +1,9 @@
-import TopDisplay from "./Components/TopDisplay";
+import Navbar from "./Components/TopDisplay";
 
 function App() {
   return (
     <div>
-      <TopDisplay/>
+      <Navbar/>
     </div>
   );
 }
