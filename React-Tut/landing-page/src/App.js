@@ -6,10 +6,11 @@ import DataTable from "./Components/DataDisplay/Samp";
 function App() {
   return (
     <>
-        <TopDisplay/>
-        <Buttons/>
+        {/*<TopDisplay/>*/}
+        {/*<Buttons/>*/}
         {/*<DataTable/>*/}
-        <DataToDisplay/>
+
+       <DataToDisplay/>
     </>
   );
 }
