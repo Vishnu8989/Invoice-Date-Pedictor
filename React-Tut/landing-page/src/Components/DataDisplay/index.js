@@ -40,8 +40,8 @@ const DataToDisplay = ()=>{
         cust_number:"",
         posting_id:"",
         invoice_id:"",
-        isOpen:"",
-        is_deleted:"",
+        isOpen:"1",
+        is_deleted:"0",
         total_open_amount:"",
         business_code:"",
         doc_id:"",
@@ -62,7 +62,7 @@ const DataToDisplay = ()=>{
         business_code,doc_id,clear_date,business_year,posting_date,document_create_date,document_create_date1,
         due_in_date,invoice_currency,document_type,area_business,baseline_create_date,
         cust_payment_terms,aging_bucket} = customer;
-
+    customer.id = tot+1;
     const changeHandler = (e)=>{
         const {name,value} = e.target;
         setCustomer({...customer,[name]:value})
@@ -75,21 +75,17 @@ const DataToDisplay = ()=>{
     let submitHandler = (e)=>{
         e.preventDefault();
         let ret = addCostumer(customer);
-        TODO:
-        if(ret!==1){
-            alert("Fill All Fields");
-            console.log("Returned Stmt : "+ret.toString());
-            return
+        if(!ret){
+            alert("Fill All Fields")
         }
-        console.log(ret);
         setTot(tot+1);
         setCustomer({
-            id : tot,
+            id : tot+1,
             cust_number:"",
             posting_id:"",
             invoice_id:"",
-            isOpen:"",
-            is_deleted:"",
+            isOpen:"1",
+            is_deleted:"0",
             total_open_amount:"",
             business_code:"",
             doc_id:"",
@@ -110,12 +106,12 @@ const DataToDisplay = ()=>{
 
     return (
         <>
-        <AddCustomer id={tot} cust_number={cust_number} posting_id={posting_id} invoice_id={invoice_id}
+        <AddCustomer id={id} cust_number={cust_number} posting_id={posting_id} invoice_id={invoice_id}
                      isOpen={isOpen} is_deleted={is_deleted} total_open_amount={total_open_amount}
                      business_code={business_code} doc_id={doc_id} clear_date={clear_date} business_year={business_year}
                      posting_date={posting_date} document_create_date={document_create_date} document_create_date1={document_create_date1} due_in_date={due_in_date}
                      invoice_currency={invoice_currency} document_type={document_type} area_business={area_business}
-                     baseline_create_date={baseline_create_date} cust_payment_terms={cust_payment_terms} aging_bucket="NA"
+                     baseline_create_date={baseline_create_date} cust_payment_terms={cust_payment_terms} aging_bucket={aging_bucket}
                      changeHandler={changeHandler} submitHandler={submitHandler}/>
         <div className='Data_Grid'>
             <DataGrid

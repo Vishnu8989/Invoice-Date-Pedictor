@@ -9,7 +9,6 @@ function App() {
         {/*<TopDisplay/>*/}
         {/*<Buttons/>*/}
         {/*<DataTable/>*/}
-
        <DataToDisplay/>
     </>
   );

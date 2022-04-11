@@ -12,12 +12,11 @@ export const getTotal= async () =>{
 export const addCostumer= async (c) =>{
     console.log(c)
     for (const cKey in c) {
-        if(c[cKey]==''){
-            alert("Please fill "+ cKey +" field")
-            return '-1'
+        if(c[cKey]==="" || c[cKey]===null){
+            c[cKey]="1"
         }
     }
-    await axios.get("http://localhost:8080/Final/AddCustomer?"
+    let toSend = "http://localhost:8080/Final/AddCustomer?"
         +"id="+c.id
         +"&cust_number="+c.cust_number
         +"&posting_id="+c.posting_id
@@ -38,7 +37,7 @@ export const addCostumer= async (c) =>{
         "&area_business="+c.area_business+
         "&baseline_create_date="+c.baseline_create_date+
         "&cust_payment_terms="+c.cust_payment_terms+
-        "&aging_bucket="+c.aging_bucket
-    );
-    return "Data id="+c.id+"&cust_number="+c.cust_number+" was sent to backend";
+        "&aging_bucket="+c.aging_bucket;
+    await axios.get(toSend);
+    console.log("Data "+toSend+" was sent to backend");
 }
