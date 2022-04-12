@@ -16,7 +16,6 @@ const Buttons = ()=>{
                     <Button variant="outlined" >Search</Button>
                 </div>
                 <div className='grp-3'>
-                    <Button variant="outlined">Add</Button>
                     <Button variant="outlined">Edit</Button>
                     <Button variant="outlined">Delete</Button>
                 </div>

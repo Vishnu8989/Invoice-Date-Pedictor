@@ -6,7 +6,7 @@ import DataTable from "./Components/DataDisplay/Samp";
 function App() {
   return (
     <>
-        {/*<TopDisplay/>*/}
+        <TopDisplay/>
         {/*<Buttons/>*/}
         {/*<DataTable/>*/}
        <DataToDisplay/>
