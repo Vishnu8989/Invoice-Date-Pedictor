@@ -1,5 +1,6 @@
 import './index.css'
 import {Button} from "@mui/material";
+import * as React from "react";
 
 
 
@@ -17,7 +18,6 @@ const Buttons = ()=>{
                 </div>
                 <div className='grp-3'>
                     <Button variant="outlined">Edit</Button>
-                    <Button variant="outlined">Delete</Button>
                 </div>
 
 

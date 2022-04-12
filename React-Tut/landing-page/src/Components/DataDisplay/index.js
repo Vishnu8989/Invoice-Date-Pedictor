@@ -1,11 +1,12 @@
 import * as React from "react";
-import {DataGrid} from "@mui/x-data-grid";
+import {DataGrid,GridRowParams} from "@mui/x-data-grid";
 import './index.css'
-import {addCostumer, getData, getTotal} from "../services/Data"
+import {addCostumer, editCostumer, getData, getTotal} from "../services/Data"
 import {useState} from "react";
-import AddCustomer from "../AddCust";
+import {AddCustomer, DeleteCustomer, EditCustomer} from "../AddCust";
 
-
+export const selectedId = [];
+export let select_customer = {};
 
 const DataToDisplay = ()=>{
     const columns = [
@@ -29,7 +30,9 @@ const DataToDisplay = ()=>{
 
     ];
     const [rows, setRows] = React.useState([]);
-    const [tot,setTot] = useState(0);
+    const [tot,setTot] = useState(0)
+    // const [checkboxSelection, setCheckboxSelection] = React.useState(true);
+
     React.useEffect( async ()=>{
         setRows(await getData());
         setTot(await getTotal());
@@ -45,16 +48,16 @@ const DataToDisplay = ()=>{
         total_open_amount:"",
         business_code:"",
         doc_id:"",
-        clear_date:"25-01-2022",
+        clear_date:"2022-01-25",
         business_year:"",
-        posting_date:"25-01-2022",
-        document_create_date:"25-01-2022",
-        document_create_date1:"25-01-2022",
-        due_in_date:"25-01-2022",
+        posting_date:"2022-01-25",
+        document_create_date:"2022-01-25",
+        document_create_date1:"2022-01-25",
+        due_in_date:"2022-01-25",
         invoice_currency:"",
         document_type:"",
         area_business:"",
-        baseline_create_date:"25-01-2022",
+        baseline_create_date:"2022-01-25",
         cust_payment_terms:"",
         aging_bucket:"NA"
     });
@@ -63,21 +66,15 @@ const DataToDisplay = ()=>{
         due_in_date,invoice_currency,document_type,area_business,baseline_create_date,
         cust_payment_terms,aging_bucket} = customer;
     customer.id = tot+1;
+
+    const [pageSize, setPageSize] = React.useState(10);
     const changeHandler = (e)=>{
         const {id,value} = e.target;
         setCustomer({...customer,[id]:value})
     }
-
-
-    const [pageSize, setPageSize] = React.useState(10);
-
     let submitHandler = async (e) => {
         e.preventDefault();
         let ret = addCostumer(customer);
-
-        if (!ret) {
-            alert("Fill All Fields")
-        }
         setRows(await getData());
         setTot(tot + 1);
         setCustomer({
@@ -104,26 +101,37 @@ const DataToDisplay = ()=>{
             aging_bucket: "NA"
         });
     }
-
     return (
         <>
-        <AddCustomer id={id} cust_number={cust_number} posting_id={posting_id} invoice_id={invoice_id}
-                     isOpen={isOpen} is_deleted={is_deleted} total_open_amount={total_open_amount}
-                     business_code={business_code} doc_id={doc_id} clear_date={clear_date} business_year={business_year}
-                     posting_date={posting_date} document_create_date={document_create_date} document_create_date1={document_create_date1} due_in_date={due_in_date}
-                     invoice_currency={invoice_currency} document_type={document_type} area_business={area_business}
-                     baseline_create_date={baseline_create_date} cust_payment_terms={cust_payment_terms} aging_bucket={aging_bucket}
-                     changeHandler={changeHandler} submitHandler={submitHandler}/>
-        <div className='Data_Grid'>
-            <DataGrid
-                rows={rows}
-                columns={columns}
-                checkboxSelection pageSize={pageSize}
-                pagination
-                rowsPerPageOptions={[10,20,100]}
-                onPageSizeChange={(newPageSize)=>setPageSize(newPageSize)}
-            />
-        </div>
+            <EditCustomer/>
+            <DeleteCustomer/>
+            <AddCustomer id={id} cust_number={cust_number} posting_id={posting_id} invoice_id={invoice_id}
+                         isOpen={isOpen} is_deleted={is_deleted} total_open_amount={total_open_amount}
+                         business_code={business_code} doc_id={doc_id} clear_date={clear_date} business_year={business_year}
+                         posting_date={posting_date} document_create_date={document_create_date} document_create_date1={document_create_date1} due_in_date={due_in_date}
+                         invoice_currency={invoice_currency} document_type={document_type} area_business={area_business}
+                         baseline_create_date={baseline_create_date} cust_payment_terms={cust_payment_terms} aging_bucket={aging_bucket}
+                         changeHandler={changeHandler} submitHandler={submitHandler}/>
+            <div className='Data_Grid'>
+                <DataGrid
+                    rows={rows}
+                    columns={columns}
+                    pageSize={pageSize}
+                    pagination
+                    checkboxSelection
+                    rowsPerPageOptions={[10,20,100]}
+                    onPageSizeChange={(newPageSize)=>setPageSize(newPageSize)}
+                    onRowClick = {(e,row)=>{
+                        if(selectedId.includes(e.row.id)){
+                            selectedId.splice(selectedId.indexOf(e.row.id),1);
+                        }else {
+                            selectedId.push(e.row.id);
+                        }
+                        select_customer = e.row;
+                        // console.log(select_customer);
+                    }}
+                />
+            </div>
         </>
     );
 }
