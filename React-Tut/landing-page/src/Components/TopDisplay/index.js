@@ -1,6 +1,6 @@
 import './index.css'
-import Product_Logo from '../../Resources/Images/Colored_Logo.png'
-import HRC_Logo from '../../Resources/Images/HighRadius-Trifecta-2020.png'
+import Product_Logo from '../../Resources/Images/abcproduct.png'
+import HRC_Logo from '../../Resources/Images/hrclogo.svg'
 const TopDisplay  = () =>{
     return(
     <>

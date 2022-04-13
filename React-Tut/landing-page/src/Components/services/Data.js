@@ -4,18 +4,15 @@ export const getData= async () =>{
     let response = await axios.get("http://localhost:8080/Final/Fetch");
     return response.data.customers;
 }
+
 export const getTotal= async () =>{
     let response = await axios.get("http://localhost:8080/Final/Fetch");
     console.log("Data returned "+response.data.totalCustomers)
     return response.data.totalCustomers
 }
+
 export const addCostumer= async (c) =>{
     console.log(c)
-    for (const cKey in c) {
-        if(c[cKey]==="" || c[cKey]===null){
-            c[cKey]="1"
-        }
-    }
     let toSend = "http://localhost:8080/Final/AddCustomer?"
         +"id="+c.id
         +"&cust_number="+c.cust_number
@@ -41,12 +38,14 @@ export const addCostumer= async (c) =>{
     await axios.get(toSend);
     console.log("Data "+toSend+" was sent to backend");
 }
+
 export const deleteCustomer= async (id) =>{
     let toSend = "http://localhost:8080/Final/DeleteCustomer?id="+id;
     console.log("Data "+toSend+" was sent to backend");
     let x = await axios.get(toSend);
     console.log("Data "+toSend+" was sent to backend with response "+x.data);
 }
+
 export const editCostumer= async (c) =>{
     console.log(c)
     let toSend = "http://localhost:8080/Final/EditCustomer?"
@@ -75,4 +74,18 @@ export const editCostumer= async (c) =>{
     alert("Send")
     await axios.get(toSend);
     console.log("Data "+toSend+" was sent to backend");
+}
+
+export const getDataByID= async (id) =>{
+    let response = await axios.get("http://localhost:8080/Final/SearchById?id="+id);
+    let found = response.data.Found;
+    if(found){
+        let result = response.data.SearchedCustomer;
+        console.log("Searched for "+id)
+        console.log(result)
+        return result
+    }
+    else{
+        return null;
+    }
 }

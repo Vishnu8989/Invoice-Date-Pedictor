@@ -1,6 +1,25 @@
 .Data_Grid{
-    height:50vh;
+    height:65vh;
     width:100vw;
-    padding-top: 5vh;
+    padding-top: 2vh;
     color: white;
+    text-decoration-color: white;
+
+}
+.Data_Grid>input{
+    color: white;
+    text-decoration-color: white;
+}
+.MuiDataGrid-cellContent{
+    color: white;
+    text-decoration-color: white;
+}
+.MuiDataGrid-columnHeaderTitle{
+    color: white;
+    text-decoration-color: white;
+}
+.MuiCheckbox-colorPrimary{
+    color: white;
+    text-decoration-color: white;
+    /*background: white;*/
 }

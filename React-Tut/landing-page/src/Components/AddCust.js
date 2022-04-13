@@ -1,14 +1,217 @@
 import * as React from 'react';
+import {useState} from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import {selectedId, select_customer} from './DataDisplay/index'
-import {deleteCustomer, editCostumer, getData} from "./services/Data";
-import {useState} from "react";
+import {select_customer, selectedId} from './DataDisplay/index'
+import {deleteCustomer, editCostumer, getDataByID} from "./services/Data";
+
+
+export const SearchCustomer = ()=>{
+    const [customer, setCustomer] = useState({
+        id : "",
+        cust_number:"",
+        posting_id:"",
+        invoice_id:"",
+        isOpen:"1",
+        is_deleted:"0",
+        total_open_amount:"",
+        business_code:"",
+        doc_id:"",
+        clear_date:"2022-01-25",
+        business_year:"",
+        posting_date:"2022-01-25",
+        document_create_date:"2022-01-25",
+        document_create_date1:"2022-01-25",
+        due_in_date:"2022-01-25",
+        invoice_currency:"",
+        document_type:"",
+        area_business:"",
+        baseline_create_date:"2022-01-25",
+        cust_payment_terms:"",
+        aging_bucket:"NA"
+    });
+    const [search, setSearch] = useState("");
+    const [openSearched, setOpenSearched] = useState(false);
+    const changeHandler = (e)=>{
+        setSearch(e.target.value)
+    }
+    function handleCloseSearched() {
+        setSearch("");
+        setOpenSearched(false);
+    }
+    let res = {};
+    async function SearchData(search) {
+        res = await getDataByID(search);
+        if (res!==null){
+            console.log("in Else")
+            setOpenSearched(true);
+            console.log("At Search Data", res);
+            console.log(res);
+            setCustomer(res);
+            console.log("Printing Customer");
+            console.log(customer);
+
+        }
+        else{
+            alert("Not Data Found\nShowing last Searched (Sl.no : " + customer.id+" Data")
+        }
+    }
+
+    return(
+        <>
+            <TextField
+                id = "SearchedId"
+                label="Search Customer Id"
+                variant="outlined"
+                value={search}
+                type="number"
+                size="small"
+                color="success"
+                placeholder="Press Enter to Search"
+                onChange={changeHandler}
+                onKeyDown={(e)=>{
+                    if (e.key === 'Enter') {
+                        SearchData(search);
+                        setOpenSearched(true);
+                    }
+                }}
+            />
+            <Dialog open={openSearched} onClose={handleCloseSearched} fullWidth={true} maxWidth={'md'}>
+                <DialogTitle id="Search Result">Search Result</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Customer Id"
+                        value={customer.id}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Customer Number"
+                        value={customer.cust_number}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Posting Id"
+                        value={customer.posting_id}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Invoice Id"
+                        value={customer.invoice_id}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Is Open"
+                        value={customer.isOpen}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Total Open Amount"
+                        value={customer.total_open_amount}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Business Code"
+                        value={customer.business_code}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Document Id"
+                        value={customer.doc_id}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Clear Date"
+                        value={customer.clear_date}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Documetn Create date"
+                        value={customer.document_create_date}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Posting Date"
+                        value={customer.posting_date}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Document Create Date"
+                        value={customer.document_create_date}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Due Date"
+                        value={customer.due_in_date}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Invoice Currency"
+                        value={customer.invoice_currency}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Document Type"
+                        value={customer.document_type}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Posting Date"
+                        value={customer.posting_date}
+                        disabled
+                    />
+                    <TextField
+                        margin="normal"
+                        variant="standard"
+                        label="Base Line Create Date"
+                        value={customer.baseline_create_date}
+                        disabled
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseSearched} variant="outlined" color="primary">
+                        Close
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </>
+    );
+}
 
 export const DeleteCustomer = ()=>{
     const handleClickDelete = () => {
@@ -70,12 +273,12 @@ export const EditCustomer = ()=>{
             return false;
         }
         else{
-            setCustomer(select_customer);
-            console.log(select_customer)
-            console.log("Now printing Customer")
-            console.log(customer)
-            handleClickOpenEdit()
-            return true;
+                setCustomer(select_customer);
+                console.log(select_customer)
+                console.log("Now printing Customer")
+                console.log(customer)
+                handleClickOpenEdit()
+                return true;
         }
     }
 
@@ -128,7 +331,7 @@ export const EditCustomer = ()=>{
         <Button variant="outlined" onClick={CheckData}>
             Edit Customer
         </Button>
-        <Dialog open={openEdit} onClose={handleCloseEdit}>
+        <Dialog open={openEdit} onClose={handleCloseEdit} fullWidth={true} maxWidth={'md'}>
             <DialogTitle>Add</DialogTitle>
             <DialogContent>
                 <TextField
@@ -141,6 +344,7 @@ export const EditCustomer = ()=>{
                     onChange={changeHandler}
                 />
                 <TextField
+
                     margin="normal"
                     id="cust_number"
                     value={customer.cust_number}
@@ -165,7 +369,7 @@ export const EditCustomer = ()=>{
 
                     margin="normal"
                     id="business_year"
-                    value={customer.business_year}
+                    value={customer.buisness_year}
                     label="Business Year"
                     type="string"
 
@@ -327,9 +531,19 @@ export const AddCustomer =  ({id,cust_number,posting_id,invoice_id,isOpen,is_del
         setOpenAdd(false);
     };
     const handleCloseAddSubmit=(e)=>{
-        submitHandler(e);
-        window.location.reload();
-        handleCloseAdd();
+        if(cust_number!=="" && posting_id!=="" && invoice_id!==""&& total_open_amount!=="" &&
+            business_code!=="" && doc_id!=="" && clear_date!=="" && business_year!=="" && posting_date!=="" &&
+            document_create_date!=="" && document_create_date1!=="" && due_in_date!=="" && invoice_currency!=="" &&
+            document_type!=="" && area_business!=="" && baseline_create_date!=="" && cust_payment_terms!==""){
+            submitHandler(e);
+            window.location.reload();
+            handleCloseAdd();
+            alert("Customer Added Successfully there might be mismatch in Sl No order as soft delete is implemented");
+        }
+        else{
+            alert("Please fill all the fields")
+        }
+
     }
     return<>
         <Button variant="outlined" onClick={handleClickOpenAdd}>

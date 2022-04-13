@@ -3,18 +3,18 @@ import {DataGrid,GridRowParams} from "@mui/x-data-grid";
 import './index.css'
 import {addCostumer, editCostumer, getData, getTotal} from "../services/Data"
 import {useState} from "react";
-import {AddCustomer, DeleteCustomer, EditCustomer} from "../AddCust";
+import {AddCustomer, DeleteCustomer, EditCustomer, SearchCustomer} from "../AddCust";
 
 export const selectedId = [];
 export let select_customer = {};
 
 const DataToDisplay = ()=>{
     const columns = [
-        {field:"id",headerName:"Customer No." },
-        {field:"business_code",headerName:"Business Code" },
-        {field:"cust_number",headerName:"Customer Number" },
+        {field:"id",headerName:"Sl No",width:70},
+        {field:"business_code",headerName:"Business Code"},
+        {field:"cust_number",headerName:"Customer Number"},
         {field:"clear_date",headerName:"Clear Date" },
-        {field:"business_year",headerName:"Business Year" },
+        {field:"buisness_year",headerName:"Business Year" },
         {field:"doc_id",headerName:"Document ID" },
         {field:"posting_date",headerName:"Posting Date" },
         {field:"document_create_date",headerName:"Document Create Date" },
@@ -67,42 +67,44 @@ const DataToDisplay = ()=>{
         cust_payment_terms,aging_bucket} = customer;
     customer.id = tot+1;
 
-    const [pageSize, setPageSize] = React.useState(10);
+    const [pageSize, setPageSize] = React.useState(20);
     const changeHandler = (e)=>{
         const {id,value} = e.target;
         setCustomer({...customer,[id]:value})
     }
     let submitHandler = async (e) => {
         e.preventDefault();
-        let ret = addCostumer(customer);
-        setRows(await getData());
-        setTot(tot + 1);
+        await addCostumer(customer);
         setCustomer({
-            id: tot + 1,
-            cust_number: "",
-            posting_id: "",
-            invoice_id: "",
-            isOpen: "1",
-            is_deleted: "0",
-            total_open_amount: "",
-            business_code: "",
-            doc_id: "",
-            clear_date: "",
-            business_year: "",
-            posting_date: "",
-            document_create_date: "",
-            document_create_date1: "",
-            due_in_date: "",
-            invoice_currency: "",
-            document_type: "",
-            area_business: "",
-            baseline_create_date: "",
-            cust_payment_terms: "",
-            aging_bucket: "NA"
+            id : tot+1,
+            cust_number:"",
+            posting_id:"",
+            invoice_id:"",
+            isOpen:"1",
+            is_deleted:"0",
+            total_open_amount:"",
+            business_code:"",
+            doc_id:"",
+            clear_date:"2022-01-25",
+            business_year:"",
+            posting_date:"2022-01-25",
+            document_create_date:"2022-01-25",
+            document_create_date1:"2022-01-25",
+            due_in_date:"2022-01-25",
+            invoice_currency:"",
+            document_type:"",
+            area_business:"",
+            baseline_create_date:"2022-01-25",
+            cust_payment_terms:"",
+            aging_bucket:"NA"
         });
+        setRows(await getData());
+        setTot(await getTotal());
     }
     return (
         <>
+            <br/>
+            <SearchCustomer/>
             <EditCustomer/>
             <DeleteCustomer/>
             <AddCustomer id={id} cust_number={cust_number} posting_id={posting_id} invoice_id={invoice_id}
@@ -119,7 +121,7 @@ const DataToDisplay = ()=>{
                     pageSize={pageSize}
                     pagination
                     checkboxSelection
-                    rowsPerPageOptions={[10,20,100]}
+                    rowsPerPageOptions={[20,50,100]}
                     onPageSizeChange={(newPageSize)=>setPageSize(newPageSize)}
                     onRowClick = {(e,row)=>{
                         if(selectedId.includes(e.row.id)){
