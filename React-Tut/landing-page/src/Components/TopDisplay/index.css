@@ -6,7 +6,7 @@
     display: grid;
     grid-template-columns: auto auto auto;
     width: 100vw;
-    height: 10vh;
+    height: 8vh;
     max-height: 10vh;
     padding: 2.5vw 0;
     background: #2D4250;

@@ -118,3 +118,11 @@ export const SearchAdvanced =async (c)=>{
         return null;
     }
 }
+
+export const GetAnalyticsData = async ()=>{
+    let response = await axios.get("http://localhost:8080/Final/AnalyticsA");
+    const ret = response.data.Companies;
+    // console.log(ret)
+    return ret;
+
+}

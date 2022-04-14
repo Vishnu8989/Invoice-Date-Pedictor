@@ -242,7 +242,7 @@ export const DeleteCustomer = ()=>{
     return(
         <>
         <Button variant="outlined" onClick={handleOpenConfirmDelete}>
-            Delete Customer
+            Delete
         </Button>
             <Dialog open={openConfirmDelete} onClose={handleCloseDeleteDialog}>
                 <DialogTitle>Delete Customer Confirmation</DialogTitle>
@@ -359,7 +359,7 @@ export const EditCustomer = ()=>{
 
     return<>
         <Button variant="outlined" onClick={CheckData}>
-            Edit Customer
+            Edit
         </Button>
         <Dialog open={openEdit} onClose={handleCloseEdit} fullWidth={true} maxWidth={'md'}>
             <DialogTitle>Add</DialogTitle>
@@ -578,7 +578,7 @@ export const AddCustomer =  ({id,cust_number,posting_id,invoice_id,isOpen,is_del
     }
     return<>
         <Button variant="outlined" onClick={handleClickOpenAdd}>
-            Add Customer
+            Add
         </Button>
         <Dialog open={openAdd} onClose={handleCloseAdd} fullWidth={fullWidth} maxWidth={maxWidth}>
             <DialogTitle>Add</DialogTitle>

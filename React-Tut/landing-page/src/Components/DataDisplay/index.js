@@ -12,29 +12,31 @@ import DialogContent from "@mui/material/DialogContent";
 import TextField from "@mui/material/TextField";
 import DialogActions from "@mui/material/DialogActions";
 import {DialogContentText} from "@mui/material";
+import Analytics from "../Analytics";
+import Predict from "../Predict";
 
 export let selectedId = [];
 export let select_customer = {};
 
 const DataToDisplay = ()=>{
     const columns = [
-        {field:"id",headerName:"Sl No",width:70},
-        {field:"business_code",headerName:"Business Code"},
-        {field:"cust_number",headerName:"Customer Number"},
-        {field:"clear_date",headerName:"Clear Date" },
-        {field:"buisness_year",headerName:"Business Year" },
-        {field:"doc_id",headerName:"Document ID" },
-        {field:"posting_date",headerName:"Posting Date" },
-        {field:"document_create_date",headerName:"Document Create Date" },
-        {field:"due_in_date",headerName:"Due Date" },
-        {field:"invoice_currency",headerName:"Invoice Currency" },
-        {field:"document_type",headerName:"Document Type" },
-        {field:"posting_id",headerName:"Posting ID" },
-        {field:"total_open_amount",headerName:"Total Open Amount" },
-        {field:"baseline_create_date",headerName:"Baseline Create Date" },
-        {field:"cust_payment_terms",headerName:"Payment Term[s]" },
-        {field:"invoice_id",headerName:"Invoice ID", },
-        {field:"aging_bucket",headerName:"Aging Bucket", }
+        {field:"id",headerName:"Sl No",width:70,align:"center"},
+        {field:"business_code",headerName:"Business Code" ,width:120,align:"center"},
+        {field:"cust_number",headerName:"Customer Number",width:120,align:"center"},
+        {field:"clear_date",headerName:"Clear Date" ,width:120,align:"center"},
+        {field:"buisness_year",headerName:"Business Year" ,width:120,align:"center"},
+        {field:"doc_id",headerName:"Document ID" ,width:120,align:"center"},
+        {field:"posting_date",headerName:"Posting Date" ,width:120,align:"center"},
+        {field:"document_create_date",headerName:"Document Create Date" ,width:120,align:"center"},
+        {field:"due_in_date",headerName:"Due Date" ,width:120,align:"center"},
+        {field:"invoice_currency",headerName:"Invoice Currency",width:120,align:"center" },
+        {field:"document_type",headerName:"Document Type" ,width:120,align:"center"},
+        {field:"posting_id",headerName:"Posting ID" ,width:120,align:"center"},
+        {field:"total_open_amount",headerName:"Total Open Amount",width:120,align:"center" },
+        {field:"baseline_create_date",headerName:"Baseline Create Date",width:120,align:"center" },
+        {field:"cust_payment_terms",headerName:"Payment Term[s]",width:120,align:"center" },
+        {field:"invoice_id",headerName:"Invoice ID",width:120,align:"center" },
+        {field:"aging_bucket",headerName:"Aging Bucket",width:120,align:"center" }
 
     ];
     const [rows, setRows] = React.useState([]);
@@ -228,9 +230,15 @@ const DataToDisplay = ()=>{
     return (
         <>
             <br/>
+            <span className="space"></span>
+            <Predict/>
+            <Analytics/>
             <AdvancedSearch/>
             <span className="space"></span>
+            <span className="space"></span>
             <SearchCustomer/>
+            <span className="space"></span>
+            <span className="space"></span>
             <span className="space"></span>
             <AddCustomer id={id} cust_number={cust_number} posting_id={posting_id} invoice_id={invoice_id}
                          isOpen={isOpen} is_deleted={is_deleted} total_open_amount={total_open_amount}
@@ -240,13 +248,19 @@ const DataToDisplay = ()=>{
                          baseline_create_date={baseline_create_date} cust_payment_terms={cust_payment_terms} aging_bucket={aging_bucket}
                          changeHandler={changeHandler} submitHandler={submitHandler}/>
             <span className="space"></span>
+            <span className="space"></span>
+            <span className="space"></span>
             <EditCustomer/>
+            <span className="space"></span>
+            <span className="space"></span>
             <span className="space"></span>
             <DeleteCustomer/>
             <div className='Data_Grid'>
                 <DataGrid
                     rows={rows}
+                    rowHeight={30}
                     columns={columns}
+                    headerHeight={70}
                     pageSize={pageSize}
                     pagination
                     checkboxSelection

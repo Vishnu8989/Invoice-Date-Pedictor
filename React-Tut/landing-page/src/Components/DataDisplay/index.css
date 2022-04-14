@@ -1,5 +1,5 @@
 .Data_Grid{
-    height:65vh;
+    height:60vh;
     width:100vw;
     padding-top: 2vh;
     color: white;
@@ -30,12 +30,44 @@
     color: white;
     text-decoration-color: white;
 }
+.MuiDataGrid-cellCheckbox{
+    color: white;
+    text-decoration-color: white;
+}
 
 .MuiButtonBase-root{
     color: white;
     text-decoration-color: white;
 }
 .MuiDataGrid-selectedRowCount {
+    color: white;
+    text-decoration-color: white;
+}
+#SearchedId{
+    text-decoration-color: red;
+    background: white;
+    border-radius: 1vh;
+}
+#SearchedId-label{
+    color: green;
+}
+.MuiTablePagination-selectLabel{
+    color: white;
+    text-decoration-color: white;
+}
+.MuiInputBase-input{
+    color: white;
+    text-decoration-color: white;
+}
+.MuiTablePagination-displayedRows{
+    color: white;
+    text-decoration-color: white;
+}
+.MuiSvgIcon-root{
+    color: white;
+    text-decoration-color: white;
+}
+#mui-6 {
     color: white;
     text-decoration-color: white;
 }
