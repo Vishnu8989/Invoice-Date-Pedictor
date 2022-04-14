@@ -36,6 +36,7 @@ export const addCostumer= async (c) =>{
         "&cust_payment_terms="+c.cust_payment_terms+
         "&aging_bucket="+c.aging_bucket;
     await axios.get(toSend);
+    console.log(toSend);
     console.log("Data "+toSend+" was sent to backend");
 }
 
@@ -81,7 +82,35 @@ export const getDataByID= async (id) =>{
     let found = response.data.Found;
     if(found){
         let result = response.data.SearchedCustomer;
-        console.log("Searched for "+id)
+        return result
+    }
+    else{
+        return null;
+    }
+}
+
+export const SearchAdvanced =async (c)=>{
+    //replace null vals with -1
+    for(let i in c){
+        if(c[i]===""){
+            c[i]="-99";
+        }
+    }
+    console.log(c)
+    let toSend = "http://localhost:8080/Final/SearchAdvanced?"
+        +"&cust_number="+c.cust_number
+        +"&invoice_id="+c.invoice_id
+        +"&doc_id="+c.doc_id
+        +"&business_year="+c.business_year;
+    console.log(toSend)
+    let response = await axios.get(toSend);
+    let found = response.data.Found;
+    if(found){
+        let result = response.data.Response;
+        console.log("Searched for year : "+c.business_year)
+        console.log("Searched for Document id : "+c.doc_id)
+        console.log("Searched for Customer Number : "+c.cust_number)
+        console.log("Searched for Invoice Id : "+c.invoice_id)
         console.log(result)
         return result
     }

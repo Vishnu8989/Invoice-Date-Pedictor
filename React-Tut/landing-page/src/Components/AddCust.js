@@ -8,6 +8,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {select_customer, selectedId} from './DataDisplay/index'
 import {deleteCustomer, editCostumer, getDataByID} from "./services/Data";
+import {DialogContentText} from "@mui/material";
 
 
 export const SearchCustomer = ()=>{
@@ -204,7 +205,7 @@ export const SearchCustomer = ()=>{
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCloseSearched} variant="outlined" color="primary">
+                    <Button onClick={handleCloseSearched} variant="outlined" color="primary" fullWidth>
                         Close
                     </Button>
                 </DialogActions>
@@ -214,7 +215,9 @@ export const SearchCustomer = ()=>{
 }
 
 export const DeleteCustomer = ()=>{
+    let [openConfirmDelete, setOpenConfirmDelete] = React.useState(false);
     const handleClickDelete = () => {
+        handleCloseDeleteDialog();
         let total = 0;
         for (let selectedIdKey in selectedId) {
             console.log("Id we got : ", selectedId[selectedIdKey]);
@@ -226,11 +229,38 @@ export const DeleteCustomer = ()=>{
         window.location.reload();
     };
 
+    function handleOpenConfirmDelete() {
+        if (selectedId.length > 0) {
+            setOpenConfirmDelete(true);
+        } else {
+            alert("Please select at least one customer to delete");
+        }
+    }
+    function handleCloseDeleteDialog() {
+        setOpenConfirmDelete(false);
+    }
     return(
         <>
-        <Button variant="outlined" onClick={handleClickDelete}>
+        <Button variant="outlined" onClick={handleOpenConfirmDelete}>
             Delete Customer
         </Button>
+            <Dialog open={openConfirmDelete} onClose={handleCloseDeleteDialog}>
+                <DialogTitle>Delete Customer Confirmation</DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Are you sure you want to delete the {selectedId.length} selected
+                        {selectedId.length > 1 ? " customers" : " customer"}?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleCloseDeleteDialog} variant="outlined" color="primary" fullWidth>
+                        Cancel
+                    </Button>
+                    <Button onClick={handleClickDelete} variant="contained" color="error" fullWidth>
+                        Delete
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </>
     );
 }
@@ -335,6 +365,7 @@ export const EditCustomer = ()=>{
             <DialogTitle>Add</DialogTitle>
             <DialogContent>
                 <TextField
+                    autoFocus
                     margin="normal"
                     id="business_code"
                     value={customer.business_code}
@@ -509,8 +540,8 @@ export const EditCustomer = ()=>{
 
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleCloseEdit}>Cancel</Button>
-                <Button onClick={handleCloseEditSubmit}>Add</Button>
+                <Button onClick={handleCloseEdit} fullWidth variant="outlined" color="primary">Cancel</Button>
+                <Button onClick={handleCloseEditSubmit} fullWidth variant="contained" color="success" >Add</Button>
             </DialogActions>
         </Dialog>
     </>
@@ -553,6 +584,7 @@ export const AddCustomer =  ({id,cust_number,posting_id,invoice_id,isOpen,is_del
             <DialogTitle>Add</DialogTitle>
             <DialogContent>
                 <TextField
+                    autoFocus
                     margin="normal"
                     id="business_code"
                     value={business_code}
@@ -727,8 +759,8 @@ export const AddCustomer =  ({id,cust_number,posting_id,invoice_id,isOpen,is_del
 
             </DialogContent>
             <DialogActions>
-                <Button onClick={handleCloseAdd}>Cancel</Button>
-                <Button onClick={handleCloseAddSubmit}>Add</Button>
+                <Button onClick={handleCloseAdd} fullWidth variant="outlined" color="primary">Cancel</Button>
+                <Button onClick={handleCloseAddSubmit} fullWidth variant="contained" color="success">Add</Button>
             </DialogActions>
         </Dialog>
     </>
