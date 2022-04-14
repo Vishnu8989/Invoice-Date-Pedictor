@@ -273,6 +273,7 @@ const DataToDisplay = ()=>{
                     onPageSizeChange={(newPageSize)=>setPageSize(newPageSize)}
                     onRowClick = {(e,row)=>{
                         select_customer = e.row;
+                        console.log(select_customer);
                     }}
                 />
             </div>

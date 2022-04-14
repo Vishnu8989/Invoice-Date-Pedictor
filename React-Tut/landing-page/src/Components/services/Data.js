@@ -72,7 +72,6 @@ export const editCostumer= async (c) =>{
         "&cust_payment_terms="+c.cust_payment_terms+
         "&aging_bucket="+c.aging_bucket;
     console.log(toSend)
-    alert("Send")
     await axios.get(toSend);
     console.log("Data "+toSend+" was sent to backend");
 }

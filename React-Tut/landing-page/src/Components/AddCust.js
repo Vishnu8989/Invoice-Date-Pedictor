@@ -66,7 +66,7 @@ export const SearchCustomer = ()=>{
         <>
             <TextField
                 id = "SearchedId"
-                label="Search Customer Id"
+                label="Search Customer by Id"
                 variant="outlined"
                 value={search}
                 type="number"
@@ -362,7 +362,7 @@ export const EditCustomer = ()=>{
             Edit
         </Button>
         <Dialog open={openEdit} onClose={handleCloseEdit} fullWidth={true} maxWidth={'md'}>
-            <DialogTitle>Add</DialogTitle>
+            <DialogTitle>Edit Customer</DialogTitle>
             <DialogContent>
                 <TextField
                     autoFocus
@@ -399,13 +399,13 @@ export const EditCustomer = ()=>{
                 <TextField
 
                     margin="normal"
-                    id="business_year"
+                    id="buisness_year"
                     value={customer.buisness_year}
                     label="Business Year"
                     type="string"
 
                     variant="standard"
-                    onChange={customer.changeHandler}
+                    onChange={changeHandler}
                 />
                 <TextField
 
@@ -541,7 +541,7 @@ export const EditCustomer = ()=>{
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleCloseEdit} fullWidth variant="outlined" color="primary">Cancel</Button>
-                <Button onClick={handleCloseEditSubmit} fullWidth variant="contained" color="success" >Add</Button>
+                <Button onClick={handleCloseEditSubmit} fullWidth variant="contained" color="success" >Update</Button>
             </DialogActions>
         </Dialog>
     </>
