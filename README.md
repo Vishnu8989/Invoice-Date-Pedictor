@@ -47,5 +47,5 @@ The future plan of this project is to add more features to the app.
 ## Demo Images
 
 <hr style="border-top: 1px dashed white;border-bottom: 1px dashed white;">
-<img href='./Sample/Web_app-1.png'>
-<img href='./Sample/web_app_2.png'>
+<a href="https://ibb.co/QYYPqvN"><img src="https://i.ibb.co/4448DRT/web-app-2.png" alt="web-app-2" border="0"></a>
+<a href="https://ibb.co/K03Nwby"><img src="https://i.ibb.co/kHW315c/Web-app-1.png" alt="Web-app-1" border="0"></a><br />
